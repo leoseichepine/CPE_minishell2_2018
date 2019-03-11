@@ -1,0 +1,12 @@
+mysh
+*.a
+*.o
+*~
+*.txt
+*#*
+a.out
+*.gcno
+*.gcda
+vgcore*
+.idea
+CMakeLists.txt
