@@ -15,6 +15,7 @@
 
 typedef int(*fctptr_t)(va_list arg);
 
+char *my_strdup(char *src);
 int find_int_len(int nb);
 int itab_to_i(int arr[], int len);
 int int_len_finder(int nb);

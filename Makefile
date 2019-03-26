@@ -5,13 +5,12 @@
 ## makefile csfml
 ##
 
-SRC			=	src/main.c \
-				src/my_defender.c \
-				src/setup/setup.c \
-				src/setup/setup_objects.c \
-				src/setup/setup_buttons.c \
-				src/setup/setup_menu.c \
-				src/music.c
+SRC			=	src/main.c\
+				src/setup.c\
+				src/env/env.c\
+				src/utils/str_tok.c\
+				src/utils/signal.c\
+				src/input/input.c
 
 NAME		=	mysh
 
@@ -23,7 +22,7 @@ INCLUDE		=	-I./include/my.h
 
 LIBFLAGS	=	-Llib/my -lmy
 
-all			:	$(NAME)
+all			:	$(NAME) clean
 
 debug		:
 				gcc -o  $(NAME) $(SRC) $(LIBFLAGS) $(CFLAGS) -g

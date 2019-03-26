@@ -8,17 +8,15 @@
 #include<stdlib.h>
 #include "my.h"
 
-char *my_strdup(char const *src)
+char *my_strdup(char *src)
 {
-    int i = 0;
-    char *str2;
-    int len = my_strlen(src);
+    char *new;
 
-    str2 = malloc(sizeof(char) * len);
-    while (i < len) {
-        str2[i] = src[i];
-        i++;
-    }
-    str2[i] == '\0';
-    return (str2);
+    if (!src)
+        return (NULL);
+    new = malloc(sizeof(char) * (my_strlen(src) + 1));
+    for (int i = 0; src[i]; i++)
+        new[i] = src[i];
+    new[my_strlen(src)] = '\0';
+    return (new);
 }
