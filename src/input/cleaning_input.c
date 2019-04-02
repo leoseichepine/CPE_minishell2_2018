@@ -9,6 +9,22 @@
 #include "header.h"
 #include "my.h"
 
+char *clean_input(char *input)
+{
+    char *clean = NULL;
+    int i = 0;
+
+    for (int i = 0; input[i]; i++)
+        if (input[i] == '\t')
+            input[i] = ' ';
+    for (; input[i] != '\n'; i++);
+    input[i] = '\0';
+    if (is_empty_str(input))
+        return (NULL);
+    clean = my_strdup_clean(input);
+    return (clean);
+}
+
 char *my_strdup_clean(char *str)
 {
     int new_len = my_strlen(str) - (count_bef(str) + count_aft(str));
@@ -18,11 +34,12 @@ char *my_strdup_clean(char *str)
 
     if (new_len <= 0)
         return (NULL);
-    for (i = skip_spaces(str, i); i < new_len; i++) {
+    i = skip_spaces(str, i);
+    for (; i < new_len + count_bef(str); i++) {
         new[j] = str[i];
         j++;
     }
-    new[j - count_aft(str)] = '\0';
+    new[j] = '\0';
     return (new);
 }
 

@@ -8,6 +8,9 @@
 #ifndef HEADER_SH2_
     #define HEADER_SH2_
 
+char *clean_input(char *input);
+void free_arr(char **arr);
+int get_input(mysh_t *sh);
 int skip_spaces(char *str, int i);
 int is_empty_str(char *str);
 int count_aft(char *str);
@@ -17,7 +20,7 @@ int get_word_len(char *str, int nb);
 char *get_next_word(char *str, int nb, int len);
 int count_word(char *str);
 
-void reset_input(input_t *input);
+void reset_input(char **arr, char *s);
 int error_input(mysh_t *sh, int read);
 
 void signal_c(int sig);

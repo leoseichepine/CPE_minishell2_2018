@@ -9,24 +9,6 @@
 #include "header.h"
 #include "my.h"
 
-char **str_to_arr(char *str)
-{
-    int word = count_word(str);
-    int len = 0;
-    char **arr = malloc(sizeof(char *) * (word + 1));
-
-    if (!arr || word == 0)
-        return (NULL);
-    for (int i = 0; i < word; i++) {
-        len = get_word_len(str, i);
-        arr[i] = get_next_word(str, i, len);
-        if (!arr[i])
-            return (NULL);
-    }
-    arr[word] = NULL;
-    return (arr);
-}
-
 int get_word_len(char *str, int nb)
 {
     int res = 0;
@@ -60,7 +42,7 @@ char *get_next_word(char *str, int nb, int len)
         }
     if (i != 0 && str[i - 1] != ' ')
         i--;
-    for (int j = 0; str[i] != '\n' && str[i] != ' '; i++, j++)
+    for (int j = 0; str[i] != '\0' && str[i] != ' '; i++, j++)
         word[j] = str[i];
     word[len] = '\0';
     return (word);
@@ -71,6 +53,8 @@ int count_word(char *str)
     int state = 0;
     int res = 0;
 
+    if (is_empty_str(str))
+        return (0);
     for (int i = 0; str[i]; i++) {
         if (str[i] == ' ' || str[i] == '\n' || str[i] == '\t')
             state = 0;

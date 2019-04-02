@@ -9,48 +9,15 @@
 #include "header.h"
 #include "my.h"
 
-char *clean_input(char *input)
-{
-    char *clean = NULL;
-    int i = 0;
-
-    for (int i = 0; input[i]; i++)
-        if (input[i] == '\t')
-            input[i] = ' ';
-    for (; input[i] != '\n'; i++);
-    input[i] = '\0';
-    clean = my_strdup_clean(input);
-    return (clean);
-}
-
-int input_to_tab(mysh_t *sh, char *input)
-{
-    char *clean = NULL;
-
-    sh->input->argnb = count_word(input);
-    printf("argnb = %i\n", sh->input->argnb);
-    clean = clean_input(input);
-    free(clean);
-    return (0);
-}
-
 int my_sh(mysh_t *sh)
 {
-    size_t len = 0;
-    char *s = NULL;
-    int read = 0;
-
     while (sh->info->state) {
         signal(SIGINT, &signal_c);
         my_printf("$>");
-        s = NULL;
-        read = getline(&s, &len, stdin);
-        if (error_input(sh, read) == 84) {
-            free(s);
+        if (!get_input(sh))
             return (0);
-        }
-        // input_to_tab(sh, s);
-        free(s);
+        if (sh->input->arr && !is_empty_str(*sh->input->arr))
+            free_arr(sh->input->arr);
     }
     return (0);
 }

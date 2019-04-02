@@ -44,6 +44,7 @@ mysh_t *init_struct(char **envp)
     sh->env = NULL;
     copy_env(&sh->env, envp);
     sh->input = malloc(sizeof(input_t));
+    sh->input->arr = NULL;
     if (!sh->input)
         return (NULL);
     sh->info->state = 1;
