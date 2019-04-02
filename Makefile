@@ -10,6 +10,10 @@ SRC			=	src/main.c\
 				src/env/env.c\
 				src/utils/str_tok.c\
 				src/utils/signal.c\
+				src/utils/error.c\
+				src/utils/parsing_input.c\
+				src/utils/cleaning_input.c\
+				src/utils/general_utils_1.c\
 				src/input/input.c
 
 NAME		=	mysh

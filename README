@@ -7,3 +7,9 @@
 
 Minishell1 + pipes + commas + redirections
 < / > / << / >>
+
+- > = redirige dans un fichier et l'écrase si il existe déjà
+- >> = redirige à la fin d'un fichier et le crée si il n'existe pas
+- < = envoie le contenu d'un fichier à une commande
+- << FIN = passe la console en mode saisie au clavier, ligner par ligne. Jusqu'a FIN.
+Toutes ces lignes seront envoyées à la commande

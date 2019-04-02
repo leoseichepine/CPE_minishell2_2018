@@ -12,23 +12,40 @@
 int free_struct(mysh_t *sh)
 {
     free_env(&sh->env);
+    free(sh->input);
+    free(sh->info->path->root);
     free(sh->info->path);
     free(sh->info);
     free(sh);
     return (0);
 }
 
+char *get_path(void)
+{
+    char path[1024];
+
+    getcwd(path, sizeof(path));
+    return (my_strdup(path));
+}
+
 mysh_t *init_struct(char **envp)
 {
     mysh_t *sh = malloc(sizeof(mysh_t));
-    char path[1024];
 
+    if (!sh)
+        return (NULL);
     sh->info = malloc(sizeof(info_t));
-    getcwd(path, sizeof(path));
-    sh->info->path = my_strdup(path);
+    if (!sh->info)
+        return (NULL);
+    sh->info->path = malloc(sizeof(path_t));
+    sh->info->path->root = get_path();
+    if (!sh->info->path || !sh->info->path->root)
+        return (NULL);
     sh->env = NULL;
     copy_env(&sh->env, envp);
-    sh->input = NULL;
+    sh->input = malloc(sizeof(input_t));
+    if (!sh->input)
+        return (NULL);
     sh->info->state = 1;
     return (sh);
 }

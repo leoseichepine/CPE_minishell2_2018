@@ -24,18 +24,23 @@ typedef struct s_list
     struct s_list *next;
 }env_t;
 
+typedef struct s_path
+{
+    char *root;
+    char *current;
+    char *prev;
+} path_t;
+
 typedef struct s_infos
 {
     int state;
-    char *path; //STRUCTURE POUR PATH?
+    path_t *path;
 } info_t;
 
 typedef struct s_input
 {
     int argnb;
-    char *line;
     char **arr;
-    struct s_input *next;
 } input_t;
 
 typedef struct s_mysh

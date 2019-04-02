@@ -45,13 +45,29 @@ int add_env_elem(env_t **head, char *name, char *value)
     return (0);
 }
 
+/*
+ENV IS NULL :
+-HOSTTYPE=x86_64-linux
+-VENDOR=unknown
+-OSTYPE=linux
+-MACHTYPE=x86_64
+-SHLVL=1
+-PWD=/home/lseichepine/delivery/PSU/PSU_minishell2_2018
+-LOGNAME=lseichepine
+-USER=lseichepine
+-GROUP=lseichepine
+-HOST=localhost.localdomain
+*/
+
 int copy_env(env_t **list, char **envp)
 {
     char *name = NULL;
     char *value = NULL;
 
-    if (*envp == NULL)  //ENV EST NULL -->?
+    if (*envp == NULL) {
+        printf("ENV IS NULL\n");
         return (0);
+    }
     for (int i = 0; envp[i] != NULL; i++) {
         name = my_str_before_tok(envp[i], '=');
         value = my_str_after_tok(envp[i], '=');
