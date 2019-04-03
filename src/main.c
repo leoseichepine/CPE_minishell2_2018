@@ -14,8 +14,7 @@ int process_input(mysh_t *sh)
     char *key[6] = {"exit", "cd", "env", "setenv", "unsetenv", NULL};
     builtin_t builtin[5] = {&my_exit, &my_exit, &my_exit, &my_exit, &my_exit};
 
-    if (sh->input->argnb == 0 || is_empty_str(sh->input->arr[0]))
-        return (0);
+
     for (int i = 0; key[i]; i++) {
         if (my_strcmp(sh->input->arr[0], key[i]))
             return (builtin[i](sh));
@@ -30,7 +29,8 @@ int my_sh(mysh_t *sh)
         my_printf("$>");
         if (!get_input(sh))
             return (0);
-        process_input(sh);
+        printf("argnb = %i\n", sh->input->argnb);
+        // process_input(sh);
         if (sh->input->arr)
             free_arr(sh->input->arr);
     }

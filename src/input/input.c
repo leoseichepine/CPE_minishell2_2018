@@ -14,11 +14,13 @@ int input_to_arr(mysh_t *sh, char *input)
     char *clean = clean_input(input);
 
     if (!clean) {
+        sh->input->argnb = 0;
         sh->input->arr = NULL;
         return (0);
     }
     sh->input->argnb = count_word(clean);
     if (sh->input->argnb == 0) {
+        sh->input->argnb = 0;
         sh->input->arr = NULL;
         return (0);
     }
@@ -36,6 +38,7 @@ int get_input(mysh_t *sh)
     size_t len = 0;
     int read = 0;
 
+    sh->input->argnb = 0;
     read = getline(&s, &len, stdin);
     if (error_input(sh, read) == 84) {
         free(s);

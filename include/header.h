@@ -9,6 +9,7 @@
     #define HEADER_SH2_
 
 int my_exit(mysh_t *sh);
+int my_env(mysh_t *sh);
 int my_strcmp(char *str1, char *str2);
 char *clean_input(char *input);
 void free_arr(char **arr);

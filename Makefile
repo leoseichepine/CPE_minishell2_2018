@@ -15,7 +15,8 @@ SRC			=	src/main.c\
 				src/input/cleaning_input.c\
 				src/utils/general_utils_1.c\
 				src/input/input.c\
-				src/builtin/builtin.c
+				src/builtin/builtin.c\
+				src/builtin/setenv.c
 
 NAME		=	mysh
 
