@@ -31,23 +31,32 @@ typedef struct s_path
     char *prev;
 } path_t;
 
-typedef struct s_infos
+typedef struct s_info_sh
 {
     int state;
     path_t *path;
-} info_t;
+} info_sh_t;
 
-typedef struct s_input
+typedef struct s_cmd
 {
     int argnb;
     char **arr;
+    struct s_input *next;
+} cmd_t;
+
+typedef struct s_input
+{
+    int cmd_nb;
+    cmd_t *cmd;
 } input_t;
 
 typedef struct s_mysh
 {
-    info_t *info;
+    info_sh_t *info;
     input_t *input;
     env_t *env;
 } mysh_t;
+
+typedef int(*builtin_t)(mysh_t *sh);
 
     #endif //MINISHELL_1_H_

@@ -8,6 +8,7 @@
 #ifndef HEADER_SH2_
     #define HEADER_SH2_
 
+int my_exit(mysh_t *sh);
 char *clean_input(char *input);
 void free_arr(char **arr);
 int get_input(mysh_t *sh);

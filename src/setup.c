@@ -34,7 +34,7 @@ mysh_t *init_struct(char **envp)
 
     if (!sh)
         return (NULL);
-    sh->info = malloc(sizeof(info_t));
+    sh->info = malloc(sizeof(info_sh_t));
     if (!sh->info)
         return (NULL);
     sh->info->path = malloc(sizeof(path_t));
@@ -44,7 +44,7 @@ mysh_t *init_struct(char **envp)
     sh->env = NULL;
     copy_env(&sh->env, envp);
     sh->input = malloc(sizeof(input_t));
-    sh->input->arr = NULL;
+    sh->input->cmd = NULL;
     if (!sh->input)
         return (NULL);
     sh->info->state = 1;

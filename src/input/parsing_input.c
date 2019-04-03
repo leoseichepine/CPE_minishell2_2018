@@ -47,21 +47,3 @@ char *get_next_word(char *str, int nb, int len)
     word[len] = '\0';
     return (word);
 }
-
-int count_word(char *str)
-{
-    int state = 0;
-    int res = 0;
-
-    if (is_empty_str(str))
-        return (0);
-    for (int i = 0; str[i]; i++) {
-        if (str[i] == ' ' || str[i] == '\n' || str[i] == '\t')
-            state = 0;
-        else if (state == 0) {
-            state = 1;
-            res++;
-        }
-    }
-    return (res);
-}

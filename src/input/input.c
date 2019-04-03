@@ -9,26 +9,50 @@
 #include "header.h"
 #include "my.h"
 
-int input_to_tab(mysh_t *sh, char *input)
+int count_cmd_nb(char *input)
+{
+    int res = 1;
+    char key[2] = {'|', ';'};
+
+    for (int i = 0; key[i]; i++)
+        if (input[0] == key[i] && input[my_strlen(input)] == key[i])
+            return (0);
+    for (int i = 0; input[i]; i++) {
+        for (int j = 0; key[j]; j++)
+            if (input[i] == key[j])
+                res++;
+    }
+    return (res);
+}
+
+char *get_next_cmd(char *input, int nb)
+{
+    return (NULL);
+}
+
+char **input_to_arr(mysh_t *sh, char *input)
 {
     char *clean = clean_input(input);
+    char **arr = NULL;
 
-    sh->input->argnb = count_word(input);
-    if (sh->input->argnb <= 0)
+    if (!clean)
+        return (NULL);
+    sh->input->cmd_nb = count_cmd_nb(clean);
+    printf("cmd nb = %i\n", sh->input->cmd_nb);
+    if (sh->input->cmd_nb == 0)
+        return (NULL);
+    arr = malloc(sizeof(char *) * (sh->input->cmd_nb + 1));
+    if (!arr)
         return (0);
-    sh->input->arr = malloc(sizeof(char *) * (sh->input->argnb + 1));
-    if (!sh->input->arr)
-        return (0);
-    for (int i = 0; i < sh->input->argnb; i++)
-        sh->input->arr[i] = get_next_word(clean, i, get_word_len(clean, i));
-    sh->input->arr[sh->input->argnb] = NULL;
+    arr[sh->input->cmd_nb] = NULL;
     free(clean);
-    return (0);
+    return (NULL);
 }
 
 int get_input(mysh_t *sh)
 {
     char *s = NULL;
+    char **arr = NULL;
     size_t len = 0;
     int read = 0;
 
@@ -37,7 +61,7 @@ int get_input(mysh_t *sh)
         free(s);
         return (0);
     }
-    input_to_tab(sh, s);
+    input_to_arr(sh, s);
     free(s);
     return (1);
 }

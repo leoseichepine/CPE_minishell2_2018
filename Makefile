@@ -14,7 +14,8 @@ SRC			=	src/main.c\
 				src/input/parsing_input.c\
 				src/input/cleaning_input.c\
 				src/utils/general_utils_1.c\
-				src/input/input.c
+				src/input/input.c\
+				src/builtin/builtin.c
 
 NAME		=	mysh
 
@@ -32,14 +33,16 @@ debug		:
 				gcc -o  $(NAME) $(SRC) $(LIBFLAGS) $(CFLAGS) -g
 
 $(NAME)		:	$(OBJ)
+				make -C lib/my/
 				gcc -g -o $(NAME) $(OBJ) $(LIBFLAGS) $(INCLUDE) $(CFLAGS)
 
 clean		:
 				rm -f $(OBJ)
+				make -C lib/my/ clean
 
 fclean		:	clean
 				rm -f $(NAME)
-				rm -f vgcore*
+				make -C lib/my clean
 
 re			:	fclean all
 
