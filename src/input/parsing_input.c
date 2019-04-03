@@ -9,6 +9,22 @@
 #include "header.h"
 #include "my.h"
 
+int count_word(char *str)
+{
+    int res = 0;
+    int state = 0;
+
+    for (int i = 0; str[i]; i++) {
+        if (str[i] == ' ' || str[i] == '\n' || str[i] == '\0')
+            state = 0;
+        else if (state == 0) {
+            state = 1;
+            res++;
+        }
+    }
+    return (res);
+}
+
 int get_word_len(char *str, int nb)
 {
     int res = 0;

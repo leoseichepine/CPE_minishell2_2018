@@ -37,17 +37,10 @@ typedef struct s_info_sh
     path_t *path;
 } info_sh_t;
 
-typedef struct s_cmd
+typedef struct s_input
 {
     int argnb;
     char **arr;
-    struct s_input *next;
-} cmd_t;
-
-typedef struct s_input
-{
-    int cmd_nb;
-    cmd_t *cmd;
 } input_t;
 
 typedef struct s_mysh
