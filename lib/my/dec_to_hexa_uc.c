@@ -25,8 +25,7 @@ int convert_dec_to_hexa_uc(unsigned long nb)
         }
         nb = nb / 16;
     }
-    for (int j = i - 1; j >= 0; j--) {
+    for (int j = i - 1; j >= 0; j--)
         my_putchar(hexadecinum[j]);
-    }
     return (i);
 }

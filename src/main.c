@@ -12,25 +12,29 @@
 int process_input(mysh_t *sh)
 {
     char *key[6] = {"exit", "cd", "env", "setenv", "unsetenv", NULL};
-    builtin_t builtin[5] = {&my_exit, &my_exit, &my_exit, &my_exit, &my_exit};
+    builtin_t builtin[5] =
+    {&my_exit, &my_cd, &my_env, &my_setenv, &my_unsetenv};
 
-
+    if (!sh->input->arr || !sh->input->argnb)
+        return (0);
     for (int i = 0; key[i]; i++) {
         if (my_strcmp(sh->input->arr[0], key[i]))
             return (builtin[i](sh));
     }
-    return (0);
+    if (!my_exec(sh))
+        return (0);
+    return (1);
 }
 
 int my_sh(mysh_t *sh)
 {
+    sh->info->state = 1;
     while (sh->info->state) {
         signal(SIGINT, &signal_c);
-        my_printf("$>");
+        my_putstr("$>");
         if (!get_input(sh))
             return (0);
-        printf("argnb = %i\n", sh->input->argnb);
-        // process_input(sh);
+        process_input(sh);
         if (sh->input->arr)
             free_arr(sh->input->arr);
     }
@@ -44,7 +48,7 @@ int check_args(int ac, char **av)
     return (0);
 }
 
-int main (int ac, char **av, char **envp)
+int main(int ac, char **av, char **envp)
 {
     mysh_t *sh = NULL;
     int err = 0;
@@ -52,7 +56,7 @@ int main (int ac, char **av, char **envp)
     if (check_args(ac, av) == 84)
         return (84);
     sh = init_struct(envp);
-    if (!sh || !sh->info)
+    if (!sh || !sh->info || !sh->input)
         return (84);
     err = my_sh(sh);
     free_struct(sh);

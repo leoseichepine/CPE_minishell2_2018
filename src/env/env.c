@@ -45,19 +45,17 @@ int add_env_elem(env_t **head, char *name, char *value)
     return (0);
 }
 
-/*
-ENV IS NULL :
--HOSTTYPE=x86_64-linux
--VENDOR=unknown
--OSTYPE=linux
--MACHTYPE=x86_64
--SHLVL=1
--PWD=/home/lseichepine/delivery/PSU/PSU_minishell2_2018
--LOGNAME=lseichepine
--USER=lseichepine
--GROUP=lseichepine
--HOST=localhost.localdomain
-*/
+int create_env_null(env_t **env)
+{
+    char *pwd = my_strdup("PWD");
+    char *oldpwd = my_strdup("OLDPWD");
+
+    if (!pwd || !oldpwd)
+        return (0);
+    add_env_elem(env, pwd, get_curr_path());
+    add_env_elem(env, oldpwd, get_curr_path());
+    return (1);
+}
 
 int copy_env(env_t **list, char **envp)
 {
@@ -65,7 +63,7 @@ int copy_env(env_t **list, char **envp)
     char *value = NULL;
 
     if (*envp == NULL) {
-        printf("ENV IS NULL\n");
+        create_env_null(list);
         return (0);
     }
     for (int i = 0; envp[i] != NULL; i++) {

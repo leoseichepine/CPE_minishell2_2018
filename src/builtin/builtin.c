@@ -14,16 +14,17 @@ int my_env(mysh_t *sh)
     env_t *tmp = sh->env;
 
     if (sh->env->name == NULL)
-        return (84);
+        return (0);
     while (tmp != NULL) {
         my_printf("%s=%s\n", tmp->name, tmp->value);
         tmp = tmp->next;
     }
-    return (0);
+    return (1);
 }
 
 int my_exit(mysh_t *sh)
 {
+    my_putstr("exit\n");
     sh->info->state = 0;
-    return (0);
+    return (1);
 }

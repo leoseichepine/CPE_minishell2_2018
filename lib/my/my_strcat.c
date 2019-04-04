@@ -10,9 +10,11 @@
 char *my_strcat(char *dest, char const *src)
 {
     int new_len = my_strlen(dest) + my_strlen(src);
-    char *new_str = malloc(sizeof(char) * (new_len + 1));
     int i = 0;
+    char *new_str = malloc(sizeof(char) * (new_len + 1));
 
+    if (!new_str)
+        return (NULL);
     for (int j = 0; dest[j] != '\0'; j++) {
         new_str[i] = dest[j];
         i++;

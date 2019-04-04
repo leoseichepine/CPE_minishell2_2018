@@ -10,6 +10,10 @@
 
 #include <unistd.h>
 #include <signal.h>
+#include <string.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 enum
 {
@@ -27,7 +31,7 @@ typedef struct s_list
 typedef struct s_path
 {
     char *root;
-    char *current;
+    char *curr;
     char *prev;
 } path_t;
 

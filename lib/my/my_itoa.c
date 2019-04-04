@@ -16,7 +16,9 @@ char *my_itoa(int nb)
     int i = 0;
 
     nbc = malloc(sizeof(char) * size + 1);
-    for (i; i < size; i++) {
+    if (!nbc)
+        return (NULL);
+    for (; i < size; i++) {
         nbc[i] = (nb % 10) + '0';
         nb = nb / 10;
     }

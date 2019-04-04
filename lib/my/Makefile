@@ -5,8 +5,7 @@
 ## Makefile Convertir .c en .o Créer une Lib Supprimer fichiers inutiles
 ##
 
-SRC 		=	concat_params.c\
-				convert_base.c\
+SRC 		=	convert_base.c\
 				dec_to_hexa_lc.c\
 				dec_to_hexa_uc.c\
 				find_int_len.c\

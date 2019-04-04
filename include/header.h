@@ -9,7 +9,13 @@
     #define HEADER_SH2_
 
 int my_exit(mysh_t *sh);
+int my_exec(mysh_t *sh);
+char *get_curr_path(void);
 int my_env(mysh_t *sh);
+int my_cd(mysh_t *sh);
+int my_setenv(mysh_t *sh);
+int delete_env_node(env_t **list, char *name);
+int my_unsetenv(mysh_t *sh);
 int my_strcmp(char *str1, char *str2);
 char *clean_input(char *input);
 void free_arr(char **arr);

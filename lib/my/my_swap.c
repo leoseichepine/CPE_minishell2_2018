@@ -14,4 +14,5 @@ void my_swap(int *a, int *b)
     c = *a;
     *a = *b;
     *b = c;
+    return ;
 }

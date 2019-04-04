@@ -16,5 +16,5 @@ int my_isneg(int n)
         my_putchar ('P');
         my_putchar ('\n');
     }
-    return(0);
+    return (0);
 }

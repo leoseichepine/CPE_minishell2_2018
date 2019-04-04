@@ -21,5 +21,5 @@ char *my_revstr(char *str)
         i++;
         len--;
     }
-    return(str);
+    return (str);
 }

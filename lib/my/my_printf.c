@@ -28,10 +28,9 @@ int compare_flag(char flag, va_list arg)
 {
     char chararr[12] = {'i', 'd', 'u', '%', 'p', 'c',
                         's', 'S', 'o', 'X', 'x','b'};
-    int i = 0;
     int nbrchar = 0;
 
-    for (i; i < 12; i++) {
+    for (int i = 0; i < 12; i++) {
         if (chararr[i] == flag)
             nbrchar = nbrchar + choose_function(i, arg);
     }

@@ -16,9 +16,8 @@ int my_putstr_oct(char *str)
             my_putchar('\\');
             convert_base(str[i], 8);
         }
-        else {
+        else
             my_putchar(str[i]);
-        }
         i++;
     }
     return (i);

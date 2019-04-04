@@ -13,9 +13,7 @@ int my_putstr(char const *str)
 
     if (!str)
         return (84);
-    for (int i = 0; str[i] != '\0'; i++) {
+    for (int i = 0; str[i] != '\0'; i++, res++)
         my_putchar(str[i]);
-        res++;
-    }
     return (res);
 }
