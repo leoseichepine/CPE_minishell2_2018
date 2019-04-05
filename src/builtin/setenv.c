@@ -54,31 +54,15 @@ int add_name_end(env_t **env_copy, char *name)
     return (1);
 }
 
-int is_alphanum(char c)
-{
-    if (c >= '0' && c <= '9')
-        return (1);
-    if (c >= 'a' && c <= 'z')
-        return (1);
-    if (c >= 'A' && c <= 'Z')
-        return (1);
-    return (0);
-}
-
-int is_alphanum_str(char *str)
-{
-    for (int i = 0; str[i]; i++)
-        if (!is_alphanum(str[i]))
-            return (0);
-    return (1);
-}
-
 int add_env_name(env_t **env_copy, char *name)
 {
     env_t *tmp = *env_copy;
+    char *err = "setenv: Variable name must contain alphanumeric characters";
 
-    if (!name || !is_alphanum_str(name))
+    if (!name)
         return (0);
+    if (!is_alphanum_str(name))
+        return (print_err(err));
     while (tmp != NULL) {
         if (my_strcmp(tmp->name, name)) {
             tmp->value = NULL;
@@ -93,9 +77,12 @@ int add_env_name(env_t **env_copy, char *name)
 int add_set_env(env_t **env_copy, char *name, char *value)
 {
     env_t *tmp = *env_copy;
+    char *err = "setenv: Variable name must contain alphanumeric characters";
 
-    if (!name || !value || !is_alphanum_str(name))
+    if (!name || !value)
         return (0);
+    if (!is_alphanum_str(name))
+        return (print_err(err));
     while (tmp != NULL) {
         if (my_strcmp(tmp->name, name)) {
             tmp->value = my_strdup(value);
@@ -110,7 +97,7 @@ int add_set_env(env_t **env_copy, char *name, char *value)
 int my_setenv(mysh_t *sh)
 {
     if (sh->input->argnb > 3) {
-        my_printf("Too many arguments\n");
+        my_putstr("Too many arguments\n");
         return (0);
     }
     if (sh->input->argnb == 1)

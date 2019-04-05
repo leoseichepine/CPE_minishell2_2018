@@ -9,6 +9,13 @@
 #include "header.h"
 #include "my.h"
 
+int print_err(char *err)
+{
+    my_putstr(err);
+    my_putchar('\n');
+    return (0);
+}
+
 int error_input(mysh_t *sh, int read)
 {
     if (read < 0) {
