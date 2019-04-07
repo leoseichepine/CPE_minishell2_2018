@@ -51,7 +51,7 @@ int add_name_end(env_t **env_copy, char *name)
         tmp->next = new;
         return (1);
     }
-    return (1);
+    return (0);
 }
 
 int add_env_name(env_t **env_copy, char *name)
@@ -65,6 +65,7 @@ int add_env_name(env_t **env_copy, char *name)
         return (print_err(err));
     while (tmp != NULL) {
         if (my_strcmp(tmp->name, name)) {
+            free(tmp->value);
             tmp->value = NULL;
             return (1);
         }
@@ -85,6 +86,7 @@ int add_set_env(env_t **env_copy, char *name, char *value)
         return (print_err(err));
     while (tmp != NULL) {
         if (my_strcmp(tmp->name, name)) {
+            free(tmp->value);
             tmp->value = my_strdup(value);
             return (1);
         }
@@ -96,10 +98,8 @@ int add_set_env(env_t **env_copy, char *name, char *value)
 
 int my_setenv(mysh_t *sh)
 {
-    if (sh->input->argnb > 3) {
-        my_putstr("Too many arguments\n");
-        return (0);
-    }
+    if (sh->input->argnb > 3)
+        return (print_err("Too many arguments"));
     if (sh->input->argnb == 1)
         return (my_env(sh));
     if (sh->input->argnb == 2)

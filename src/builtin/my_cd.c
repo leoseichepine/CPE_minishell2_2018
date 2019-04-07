@@ -21,6 +21,8 @@ int change_dir(mysh_t *sh, char *path)
         return (0);
     free(sh->info->path->curr);
     sh->info->path->curr = get_curr_path();
+    if (!sh->info->path->curr)
+        return (0);
     add_set_env(&sh->env, "PWD", sh->info->path->curr);
     add_set_env(&sh->env, "OLDPWD", sh->info->path->prev);
     return (1);
@@ -31,9 +33,8 @@ int my_cd(mysh_t *sh)
     if (sh->input->arr[1] == NULL) {
         return (change_dir(sh, sh->info->path->root));
     } else if (sh->input->argnb > 2) {
-        my_putstr("Too many arguments\n");
-        return (0);
+        print_err("Too many arguments\n");
     } else
         return (change_dir(sh, sh->input->arr[1]));
-    return (1);
+    return (0);
 }

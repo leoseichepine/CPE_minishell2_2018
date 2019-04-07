@@ -54,6 +54,8 @@ int create_env_null(env_t **env)
         return (0);
     add_env_elem(env, pwd, get_curr_path());
     add_env_elem(env, oldpwd, get_curr_path());
+    free(pwd);
+    free(oldpwd);
     return (1);
 }
 

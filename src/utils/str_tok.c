@@ -9,6 +9,26 @@
 #include "header.h"
 #include "my.h"
 
+char *get_word(char *str, char delim, int nb, int len)
+{
+    char *word = NULL;
+    int i = 0;
+    int j = 0;
+
+    if (!str || !delim || nb < 0)
+        return (NULL);
+    word = malloc(sizeof(char) * (len + 1));
+    for (; str[i] && nb > 0; i++)
+        if (str[i] == delim)
+            nb--;
+    if (i != 0 && str[i - 1] != delim)
+        i--;
+    for (; str[i] && str[i] != '\n' && str[i] != delim; j++, i++)
+        word[j] = str[i];
+    word[j] = '\0';
+    return (word);
+}
+
 char *my_str_before_tok(char *str, char tok)
 {
     char *new_str;

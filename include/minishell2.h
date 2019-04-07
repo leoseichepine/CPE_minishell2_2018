@@ -38,6 +38,7 @@ typedef struct s_path
 typedef struct s_info_sh
 {
     int state;
+    int tty;
     path_t *path;
 } info_sh_t;
 

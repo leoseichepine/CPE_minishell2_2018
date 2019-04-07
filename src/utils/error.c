@@ -19,7 +19,8 @@ int print_err(char *err)
 int error_input(mysh_t *sh, int read)
 {
     if (read < 0) {
-        my_putstr("exit\n");
+        if (sh->info->tty)
+            my_putstr("exit\n");
         sh->info->state = 0;
         return (84);
     }

@@ -9,7 +9,14 @@
     #define HEADER_SH2_
 
 int my_exit(mysh_t *sh);
-int my_exec(mysh_t *sh);
+int add_set_env(env_t **env_copy, char *name, char *value);
+char **load_env_arr(mysh_t *sh);
+char **get_real_path(env_t **env_copy);
+char *get_word(char *str, char delim, int nb, int len);
+int is_alphanum(char c);
+int is_alphanum_str(char *str);
+int print_err(char *err);
+int my_redirect_exec(mysh_t *sh);
 char *get_curr_path(void);
 int my_env(mysh_t *sh);
 int my_cd(mysh_t *sh);

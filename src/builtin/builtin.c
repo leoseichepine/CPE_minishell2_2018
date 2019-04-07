@@ -24,7 +24,8 @@ int my_env(mysh_t *sh)
 
 int my_exit(mysh_t *sh)
 {
-    my_putstr("exit\n");
+    if (sh->info->tty)
+        my_putstr("exit\n");
     sh->info->state = 0;
     return (1);
 }

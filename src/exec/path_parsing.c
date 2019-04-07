@@ -30,6 +30,8 @@ int get_path_size(char *path)
 {
     int size = 0;
 
+    if (!path)
+        return (0);
     for (int i = 0; path[i] != '\0'; i++)
         if (path[i] == ':')
             size++;
@@ -71,24 +73,27 @@ char *get_next_path(char *path, int path_len, int number)
         word[j] = path[i];
         j++;
     }
+    word[j] = '\0';
     return (word);
 }
 
 char **get_real_path(env_t **env_copy)
 {
-    char *path_not_parsed = get_path(env_copy);
-    int path_size = get_path_size(path_not_parsed);
-    char **real_path = malloc(sizeof(char *) * (path_size + 1));
+    char *path = get_path(env_copy);
+    char **real_path = NULL;
     int path_len = 0;
+    int i = 0;
 
-    if (!path_not_parsed || !path_size)
+    if (!path || get_path_size(path) <= 0)
         return (NULL);
-    for (int i = 0; i < path_size; i++) {
-        path_len = get_path_len(path_not_parsed, i);
-        real_path[i] = get_next_path(path_not_parsed, path_len, i);
-        real_path[i][path_len] = '\0';
+    real_path = malloc(sizeof(char *) * (get_path_size(path) + 1));
+    if (!real_path)
+        return (NULL);
+    for (; i < get_path_size(path); i++) {
+        path_len = get_path_len(path, i);
+        real_path[i] = get_word(path, ':', i, path_len);
     }
-    real_path[path_size] = NULL;
-    free(path_not_parsed);
+    real_path[i] = NULL;
+    free(path);
     return (real_path);
 }

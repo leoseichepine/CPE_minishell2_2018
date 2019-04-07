@@ -17,11 +17,10 @@ int process_input(mysh_t *sh)
 
     if (!sh->input->arr || !sh->input->argnb)
         return (0);
-    for (int i = 0; key[i]; i++) {
+    for (int i = 0; key[i]; i++)
         if (my_strcmp(sh->input->arr[0], key[i]))
             return (builtin[i](sh));
-    }
-    if (!my_exec(sh))
+    if (!my_redirect_exec(sh))
         return (0);
     return (1);
 }
@@ -30,8 +29,10 @@ int my_sh(mysh_t *sh)
 {
     sh->info->state = 1;
     while (sh->info->state) {
+        sh->info->tty = isatty(0);
         signal(SIGINT, &signal_c);
-        my_putstr("$>");
+        if (sh->info->tty)
+            my_putstr("$>");
         if (!get_input(sh))
             return (0);
         process_input(sh);

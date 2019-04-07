@@ -52,10 +52,8 @@ int my_unsetenv(mysh_t *sh)
 {
     env_t *tmp = sh->env;
 
-    if (sh->input->argnb <= 1) {
-        my_putstr("Too few arguments\n");
-        return (84);
-    }
+    if (sh->input->argnb <= 1)
+        return (print_err("Too few arguments"));
     while (tmp != NULL) {
         for (int i = 1; i < sh->input->argnb; i++) {
             if (my_strcmp(tmp->name, sh->input->arr[i])) {
