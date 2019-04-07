@@ -1,4 +1,6 @@
 mysh
+my_segv
+matchstick
 *.a
 *.o
 *~
