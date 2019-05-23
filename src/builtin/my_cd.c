@@ -30,11 +30,13 @@ int change_dir(mysh_t *sh, char *path)
 
 int my_cd(mysh_t *sh)
 {
-    if (sh->input->arr[1] == NULL) {
-        return (change_dir(sh, sh->info->path->root));
-    } else if (sh->input->argnb > 2) {
+    if (sh->input->argnb > 2)
         print_err("Too many arguments\n");
-    } else
+    if (sh->input->arr[1] == NULL)
+        return (change_dir(sh, sh->info->path->root));
+    else if (my_strcmp(sh->input->arr[1], "-"))
+        return (change_dir(sh, sh->info->path->prev));
+    else
         return (change_dir(sh, sh->input->arr[1]));
     return (0);
 }

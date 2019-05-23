@@ -19,6 +19,7 @@ SRC			=	src/main.c\
 				src/builtin/setenv.c\
 				src/builtin/unsetenv.c\
 				src/builtin/my_cd.c\
+				src/builtin/echo.c\
 				src/exec/exec.c\
 				src/exec/path_parsing.c\
 				src/env/env_to_arr.c

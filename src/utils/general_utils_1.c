@@ -22,7 +22,7 @@ int is_alphanum(char c)
 
 int is_alphanum_str(char *str)
 {
-    for (int i = 0; str[i]; i++)
+    for (int i = 0; str[i] && str[i] != '\n'; i++)
         if (!is_alphanum(str[i]))
             return (0);
     return (1);

@@ -8,6 +8,7 @@
 #ifndef HEADER_SH2_
     #define HEADER_SH2_
 
+int my_echo(mysh_t *sh);
 int my_exit(mysh_t *sh);
 int add_set_env(env_t **env_copy, char *name, char *value);
 char **load_env_arr(mysh_t *sh);

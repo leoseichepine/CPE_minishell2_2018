@@ -57,7 +57,7 @@ int add_name_end(env_t **env_copy, char *name)
 int add_env_name(env_t **env_copy, char *name)
 {
     env_t *tmp = *env_copy;
-    char *err = "setenv: Variable name must contain alphanumeric characters";
+    char *err = "setenv: Variable name must contain alphanumeric characters.";
 
     if (!name)
         return (0);
@@ -78,7 +78,7 @@ int add_env_name(env_t **env_copy, char *name)
 int add_set_env(env_t **env_copy, char *name, char *value)
 {
     env_t *tmp = *env_copy;
-    char *err = "setenv: Variable name must contain alphanumeric characters";
+    char *err = "setenv: Variable name must contain alphanumeric characters.";
 
     if (!name || !value)
         return (0);

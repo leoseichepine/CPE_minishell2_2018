@@ -55,28 +55,6 @@ int get_path_len(char *path, int number)
     return (res);
 }
 
-char *get_next_path(char *path, int path_len, int number)
-{
-    char *word = NULL;
-    int i = 0;
-    int j = 0;
-
-    word = malloc(sizeof(char) * (path_len + 1));
-    while (path[i] != '\0' && number > 0) {
-        if (path[i] == ':')
-            number--;
-        i++;
-    }
-    if (i != 0 && path[i - 1] != ':')
-        i--;
-    for (; path[i] != '\0' && path[i] != '\n' && path[i] != ':'; i++) {
-        word[j] = path[i];
-        j++;
-    }
-    word[j] = '\0';
-    return (word);
-}
-
 char **get_real_path(env_t **env_copy)
 {
     char *path = get_path(env_copy);
@@ -92,6 +70,8 @@ char **get_real_path(env_t **env_copy)
     for (; i < get_path_size(path); i++) {
         path_len = get_path_len(path, i);
         real_path[i] = get_word(path, ':', i, path_len);
+        if (!real_path[i])
+            return (NULL);
     }
     real_path[i] = NULL;
     free(path);

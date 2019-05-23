@@ -60,7 +60,7 @@ int exec_cmd_path(mysh_t *sh)
     for (int i = 0; real_path[i]; i++) {
         command_path = my_strcat(real_path[i], my_path);
         if (access(command_path, F_OK | X_OK) == 0) {
-            free(real_path);
+            free_arr(real_path);
             free(my_path);
             ex = exec_command(sh, command_path);
             free(command_path);

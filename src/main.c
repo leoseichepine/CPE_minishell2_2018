@@ -11,9 +11,9 @@
 
 int process_input(mysh_t *sh)
 {
-    char *key[6] = {"exit", "cd", "env", "setenv", "unsetenv", NULL};
-    builtin_t builtin[5] =
-    {&my_exit, &my_cd, &my_env, &my_setenv, &my_unsetenv};
+    char *key[7] = {"exit", "cd", "env", "setenv", "unsetenv", "echo", NULL};
+    builtin_t builtin[6] =
+    {&my_exit, &my_cd, &my_env, &my_setenv, &my_unsetenv, &my_echo};
 
     if (!sh->input->arr || !sh->input->argnb)
         return (0);
@@ -32,7 +32,7 @@ int my_sh(mysh_t *sh)
         sh->info->tty = isatty(0);
         signal(SIGINT, &signal_c);
         if (sh->info->tty)
-            my_putstr("$>");
+            my_putstr("\033[0;31m$>\033[0m");
         if (!get_input(sh))
             return (0);
         process_input(sh);
